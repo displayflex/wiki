@@ -3,29 +3,26 @@
 
 	const markdownSourceElement = document.querySelector('#markdown-source');
 	const markdownResultElement = document.querySelector('#markdown-result');
-
-	markdownSourceElement.value = `
-# Заголовок статьи
-
-Далеко-далеко за [словесными горами в стране](#), гласных и согласных живут рыбные тексты. Использовало однажды гор семь, снова раз. Города большой безорфографичный меня.
-
-Lorem имени, продолжил своего реторический своих послушавшись грустный даль страну парадигматическая океана рыбными, рыбного переписывается, страна? Свой заголовок свое, он.
-
-## Заголовок второго уровня
-
-Что, повстречался последний всеми его щеке не, знаках встретил использовало, прямо, раз свой. Города силуэт, заглавных всеми, свою прямо но!
-Текстов которой вскоре журчит рекламных свою, сбить на берегу рот. Великий страну проектах знаках над что путь языком, подпоясал, свой они!
-
-### Заголовок третьего уровня
-
-Скатился переулка первую единственное имени над запятых, грустный заголовок переписывается власти переписали. Букв строчка вскоре продолжил, страна злых раз страну.
-
-Букв переписали, продолжил. Силуэт, путь текста журчит переписывается назад от всех его выйти однажды, бросил букв, путь несколько вскоре даже рукопись.
-	`;
+	const saveArticleButton = document.querySelector('#save-article-button');
+	const articleTitleElement = document.querySelector('#article-title');
 
 	markdownSourceElement.addEventListener('keyup', function(event) {
 		const result = marked(markdownSourceElement.value);
 		markdownResultElement.innerHTML = result;
-		console.log(result);
+	});
+
+	saveArticleButton.addEventListener('click', function() {
+		const newArticle = {
+			id: 0,
+			title: articleTitleElement.value,
+			content: markdownSourceElement.value
+		};
+
+		const json = localStorage.getItem('articles');
+		const articles = JSON.parse(json);
+
+		newArticle.id = articles.length + 1;
+		articles.push(newArticle);
+		localStorage.setItem('articles', JSON.stringify(articles));
 	});
 })();
