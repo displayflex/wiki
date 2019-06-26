@@ -12,4 +12,14 @@
 
 	// Опубликовать 200 символов последней из добавленных статей
 	markdownArticleElement.innerHTML = marked(lastArticle.content.substr(0, 200) + '...');
+
+	// Вывести список статей
+	let str = '';
+
+	for (let i = 0; i < articles.length; i++) {
+		const currentArticle = articles[i];
+		str += `<li class="other-list__item"><a class="other-list__link" href="#">${currentArticle.title}</a></li>`
+	}
+
+	allArticlesListElement.innerHTML = str;
 })();
