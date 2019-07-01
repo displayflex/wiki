@@ -3,6 +3,7 @@
 
 	const articleElement = document.querySelector('#article');
 	const lastArticlesListElement = document.querySelector('#last-articles');
+	const editArticleButton = document.querySelector('#edit-article');
 
 	const id = parseInt(location.search.substr(4));
 	const json = localStorage.getItem('articles');
@@ -29,4 +30,9 @@
 	}
 
 	lastArticlesListElement.innerHTML = str;
+
+	// Редактирование статьи
+	editArticleButton.addEventListener('click', function() {
+		location.replace('new.html?id=' + id);
+	});
 })();
