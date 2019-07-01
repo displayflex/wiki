@@ -2,6 +2,7 @@
 	'use strict';
 
 	const articleElement = document.querySelector('#article');
+	const lastArticlesListElement = document.querySelector('#last-articles');
 
 	const id = parseInt(location.search.substr(4));
 	const json = localStorage.getItem('articles');
@@ -16,4 +17,16 @@
 	}
 
 	articleElement.innerHTML = `<h1>${article.title}</h1>` + marked(article.content);
+
+	// Вывести список 3-х последних статей статей
+	let str = '';
+
+	for (let i = articles.length - 3; i < articles.length; i++) {
+		const currentArticle = articles[i];
+		str += `<li class="articles-list-item"><a href="article.html?id=${currentArticle.id}" class="articles-list-link">${
+			currentArticle.title
+		}</a></li>`;
+	}
+
+	lastArticlesListElement.innerHTML = str;
 })();
